@@ -10,4 +10,6 @@ RUN cargo update
 
 FROM docker.io/rust:alpine AS libcobhan-build-alpine
 
+RUN apk add build-base py3-cffi
+
 COPY --from=alpine-cargo-index /usr/local/cargo /usr/local/cargo
