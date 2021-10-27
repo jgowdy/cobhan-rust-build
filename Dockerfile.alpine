@@ -1,0 +1,13 @@
+FROM docker.io/rust:alpine AS alpine-cargo-index
+
+ENV ALPINE=1
+
+COPY /cobhan /cobhan/
+
+WORKDIR /cobhan/library/rust/libcobhandemo
+
+RUN cargo update
+
+FROM docker.io/rust:alpine AS libcobhan-build-alpine
+
+COPY --from=alpine-cargo-index /usr/local/cargo /usr/local/cargo
