@@ -18,5 +18,7 @@ jobs:
         submodules: true
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag cobhan-rust-build:$(date +%s)
+    - name: Log in to registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Publish the Docker image
-      run: docker push cobhan-rust-build:latest
+      run: docker push ghcr.io/jgowdy/cobhan-rust-build:latest
