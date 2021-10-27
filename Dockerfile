@@ -1,8 +1,8 @@
 FROM docker.io/rust:slim-bullseye AS slim-bullseye-cargo-index
 
-COPY /cobhan /cobhan
+COPY cobhan/library/rust /cobhan
 
-WORKDIR /cobhan/library/rust/libcobhandemo
+WORKDIR /cobhan/libcobhandemo
 
 RUN cargo update
 
