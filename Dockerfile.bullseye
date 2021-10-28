@@ -1,4 +1,4 @@
-FROM ghcr.io/jgowdy/rust-bullseye-cache AS slim-bullseye-cargo-index
+FROM ghcr.io/jgowdy/rust-slim-bullseye-cache AS slim-bullseye-cargo-index
 
 COPY /cobhan /cobhan
 
@@ -6,7 +6,7 @@ WORKDIR /cobhan/library/rust/libcobhandemo
 
 RUN cargo update
 
-FROM ghcr.io/jgowdy/rust-bullseye-cache AS libcobhandemo-build-bullseye-slim
+FROM ghcr.io/jgowdy/rust-slim-bullseye-cache AS libcobhandemo-build-bullseye-slim
 
 COPY --from=slim-bullseye-cargo-index /usr/local/cargo /usr/local/cargo
 
