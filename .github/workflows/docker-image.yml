@@ -9,6 +9,30 @@ on:
     branches: [ main ]
 
 jobs:
+  cache-alpine:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile.rust-alpine-cache --tag ghcr.io/jgowdy/rust-alpine-cache:latest
+    - name: Log in to registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Publish the Docker image
+      run: docker push ghcr.io/jgowdy/rust-alpine-cache:latest
+  cache-bullseye:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile.rust-bullseye-cache --tag ghcr.io/jgowdy/rust-bullseye-cache:latest
+    - name: Log in to registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Publish the Docker image
+      run: docker push ghcr.io/jgowdy/rust-bullseye-cache:latest
   build-bullseye:
     runs-on: ubuntu-latest
     steps:

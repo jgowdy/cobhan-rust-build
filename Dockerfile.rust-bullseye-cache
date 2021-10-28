@@ -1,0 +1,2 @@
+FROM docker.io/rust:slim-bullseye
+
