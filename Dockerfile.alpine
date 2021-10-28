@@ -1,4 +1,4 @@
-FROM docker.io/rust:alpine AS alpine-cargo-index
+FROM ghcr.io/jgowdy/rust-alpine-cache AS alpine-cargo-index
 
 ENV ALPINE=1
 
@@ -8,7 +8,7 @@ WORKDIR /cobhan/library/rust/libcobhandemo
 
 RUN cargo update
 
-FROM docker.io/rust:alpine AS libcobhan-build-alpine
+FROM ghcr.io/jgowdy/rust-alpine-cache AS libcobhan-build-alpine
 
 RUN apk add build-base py3-cffi
 
